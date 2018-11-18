@@ -1,5 +1,5 @@
 CREATE TABLE VEHICLE
-(LicenseNo      CHAR(7),
+(LicenseNo      CHAR(8),
  Make           VARCHAR2(20),
  Model          VARCHAR2(20),
  Color          VARCHAR2(20),
@@ -10,7 +10,8 @@ CREATE TABLE VEHICLE
  InspectionDate Date,
  OutNo          CHAR(7),
  CONSTRAINT Vehicle_LicenseNo_PK  PRIMARY KEY (LicenseNo),
- CONSTRAINT Vehicle_OutNo_FK      FOREIGN KEY (OutNo) REFERENCES OUTLET (OutNo));
+ CONSTRAINT Vehicle_OutNo_FK      FOREIGN KEY (OutNo) REFERENCES OUTLET (OutNo),
+ CONSTRAINT Vehicle_Age_CK        CHECK (EXTRACT(YEAR FROM SYSDATE) - Year <= 10));
   
 
 CREATE TABLE CLIENT
@@ -27,19 +28,19 @@ CREATE TABLE CLIENT
  Email         VARCHAR2(25),
  CONSTRAINT Client_ClientNo_PK   PRIMARY KEY (ClientNo));
 
+
 CREATE TABLE RAGREEMENT
 (RentalNo       CHAR(7),
  StartDate      Date,
  ReturnDate     Date,
- MileageBefore  Number(10)
- MileageAfter   Number(10)
- InsuranceType  VARCHAR2(20)
+ MileageBefore  Number(6)
+ MileageAfter   Number(6)
+ InsuranceType  VARCHAR2(100)
  ClientNo       CHAR(7)
  LicenseNo      CHAR(7),
  CONSTRAINT Ragreement_RentalNo_PK   PRIMARY KEY (RentalNo),
  CONSTRAINT Ragreement_ClientNo_FK   FOREIGN KEY (ClientNo) REFERENCES ClIENT (ClientNo),
  CONSTRAINT Ragrement_LicenseNo_FK   FOREIGN KEY (LicenseNo) REFERENCES VEHICLE (LicenseNo),
- CONSTRINAT Ragreement_ReturnDate_CK CHECK (ReturnDate >= StartDate)
+ CONSTRINAT Ragreement_ReturnDate_CK CHECK (ReturnDate >= StartDate),
  CONSTRAINT Ragreement_Mileage_CK    CHECK (MileageAfter >= MileageBefore));
-
 
