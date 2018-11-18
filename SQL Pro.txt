@@ -44,14 +44,14 @@ CREATE TABLE FAULTREPORT
  DateChecked    DATE,
  Comments	VARCHAR2(50),
  EmpNo   	CHAR(7),
- LicenseNo	CHAR(7),
+ LicenseNo	CHAR(8),
  RentalNo	CHAR(7),
 =======
 (ReportNum   	 CHAR(7),
  DateChecked     	 DATE,
  Comments	 VARCHAR2(50),
  EmpNo   	 CHAR(7),
- LicenseNo	 CHAR(7),
+ LicenseNo	 CHAR(8),
  RentalNo	 	 CHAR(7),
 >>>>>>> 631aa454d9bee7a614b09304f8da5e82470a34e7
  CONSTRAINT FAULTREPORT_ReportNum_PK     PRIMARY KEY (ReportNum),
@@ -72,7 +72,7 @@ CREATE TABLE OUTLET
  CONSTRAINT OUTLET_ManagerNo_FK     FOREIGN KEY (ManagerNo)     REFERENCES EMPLOYEE (EmpNo));
 
 CREATE TABLE VEHICLE
-(LicenseNo      CHAR(7),
+(LicenseNo      CHAR(8),
  Make           VARCHAR2(20),
  Model          VARCHAR2(20),
  Color          VARCHAR2(20),
@@ -106,11 +106,11 @@ CREATE TABLE RAGREEMENT
 (RentalNo       CHAR(7),
  StartDate      Date,
  ReturnDate     Date,
- MileageBefore  Number(10)
- MileageAfter   Number(10)
- InsuranceType  VARCHAR2(20)
+ MileageBefore  Number(6)
+ MileageAfter   Number(6)
+ InsuranceType  VARCHAR2(100)
  ClientNo       CHAR(7)
- LicenseNo      CHAR(7),
+ LicenseNo      CHAR(8),
  CONSTRAINT Ragreement_RentalNo_PK   PRIMARY KEY (RentalNo),
  CONSTRAINT Ragreement_ClientNo_FK   FOREIGN KEY (ClientNo) REFERENCES ClIENT (ClientNo),
  CONSTRAINT Ragrement_LicenseNo_FK   FOREIGN KEY (LicenseNo) REFERENCES VEHICLE (LicenseNo),
