@@ -6,7 +6,6 @@ DROP TABLE CLIENT;
 DROP TABLE RAGREEMENT;
 
 CREATE TABLE EMPLOYEE
-<<<<<<< HEAD
 (EmpNo   	CHAR(7),
  Fname     	VARCHAR2(25),
  Lname	 	VARCHAR2(25),
@@ -19,7 +18,6 @@ CREATE TABLE EMPLOYEE
  HireDate  	DATE DEFUALT SYSDATE,
  OutNo     	CHAR(7),
  SupervisorNo 	CHAR(7),
-=======
 (EmpNo   	 CHAR(7),
  Fname     	 VARCHAR2(25),
  Lname	 	 VARCHAR2(25),
@@ -32,28 +30,24 @@ CREATE TABLE EMPLOYEE
  HireDate  	 DATE DEFAULT SYSDATE,
  OutNo     	 CHAR(7),
  SupervisorNo 	 CHAR(7),
->>>>>>> 631aa454d9bee7a614b09304f8da5e82470a34e7
  CONSTRAINT EMPLOYEE_EmpNo_PK     PRIMARY KEY (EmpNo),
  CONSTRAINT EMPLOYEE_OutNo_FK FOREIGN KEY (OutNo) REFERENCES OUTLET (OutNo),
  CONSTRAINT EMPLOYEE_DOB_HireDate_CK     CHECK (HireDate >= DOB),
  CONSTRAINT EMPLOYEE_SupervisorNo_FK     FOREIGN KEY (SupervisorNo)     REFERENCES EMPLOYEE (EmpNo));
 
 CREATE TABLE FAULTREPORT
-<<<<<<< HEAD
 (ReportNum   	CHAR(7),
  DateChecked    DATE,
  Comments	VARCHAR2(50),
  EmpNo   	CHAR(7),
  LicenseNo	CHAR(8),
  RentalNo	CHAR(7),
-=======
 (ReportNum   	 CHAR(7),
  DateChecked     	 DATE,
  Comments	 VARCHAR2(50),
  EmpNo   	 CHAR(7),
  LicenseNo	 CHAR(8),
  RentalNo	 	 CHAR(7),
->>>>>>> 631aa454d9bee7a614b09304f8da5e82470a34e7
  CONSTRAINT FAULTREPORT_ReportNum_PK     PRIMARY KEY (ReportNum),
  CONSTRAINT FAULTREPORT_EmpNo_FK FOREIGN KEY (EmpNo) REFERENCES EMPLOYEE (EmpNo),
  CONSTRAINT FAULTREPORT_LicenseNo_FK     FOREIGN KEY (LicenseNo)     REFERENCES VEHICLE (LicenseNo),
