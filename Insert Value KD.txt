@@ -1,0 +1,63 @@
+INSERT INTO EMPLOYEE
+VALUES ('00001', 'Ayah', 'Norris', 'President', '(868) 623-1760', 'miltchev@comcast.net', to_date('13-JUN-1968', 'dd-mon-yyyy'), 'Male', 500000, to_date('13-SEP-1998', 'dd-mon-yyyy'), NULL, NULL);
+INSERT INTO EMPLOYEE
+VALUES ('00002', 'Lilly', 'Johnson', 'Area Managers', '(978) 899-8637', 'meder@me.com', to_date('1-SEP-1974  3:23pm', 'dd-mon-yyyy'), 'Male', 360000, to_date('13-MAR-2000', 'dd-mon-yyyy'), NULL, '00001');
+INSERT INTO EMPLOYEE
+VALUES ('00003', 'Nellie', 'Hart', 'Area Managers', '(320) 951-6776', 'klaudon@verizon.net', to_date('21-MAR-1976', 'dd-mon-yyyy'), 'Female', 260000, to_date('05-JAN-1999', 'dd-mon-yyyy'), NULL, '00001');
+INSERT INTO EMPLOYEE
+VALUES ('00004', 'Lacey', 'Owens', 'Sales Rep', '(683) 209-7402', 'multiplx@hotmail.com', to_date('06-JAN-1981', 'dd-mon-yyyy'), 'Male', 210000, to_date('19-OCT-2003', 'dd-mon-yyyy'), '001', '00002');
+INSERT INTO EMPLOYEE
+VALUES ('00005', 'Maci', 'Love', 'Sales Rep', '(744) 532-7771', 'teverett@yahoo.com', to_date('27-OCT-1982', 'dd-mon-yyyy'), 'Male', 160000, to_date('04-NOV-2006', 'dd-mon-yyyy'), '002', '00002');
+INSERT INTO EMPLOYEE
+VALUES ('00006', 'Teegan', 'Hansen', 'Sales Rep', '(405) 303-8116', 'carroll@comcast.net', to_date('15-NOV-1985', 'dd-mon-yyyy'), 'Female', 140000, to_date('01-DEC-2002', 'dd-mon-yyyy'), '003', '00003');
+INSERT INTO EMPLOYEE
+VALUES ('00007', 'Miya', 'Rees', 'Sales Rep', '(865) 380-7830', 'floxy@me.com', to_date('02-DEC-1993', 'dd-mon-yyyy'), 'Male', 160000, to_date('13-SEP-2004', 'dd-mon-yyyy'), '001', '00003');
+INSERT INTO EMPLOYEE
+VALUES ('00008', 'Atlanta', 'Nguyen', 'Mechanics', '(528) 395-6026', 'knorr@yahoo.com', to_date('11-SEP-1984', 'dd-mon-yyyy'), 'Female', 190000, to_date('03-AUG-2007', 'dd-mon-yyyy'), '001', '00002');
+INSERT INTO EMPLOYEE
+VALUES ('00009', 'Natalia', 'Klein', 'Mechanics', '(701) 780-3722', 'makarow@att.net', to_date('18-AUG-1983', 'dd-mon-yyyy'), 'Male', 120000, to_date('20-SEP-2009', 'dd-mon-yyyy'), '002', '00003');
+INSERT INTO EMPLOYEE
+VALUES ('00010', 'Madison', 'Roberts', 'Mechanics', '(627) 412-7117', 'mwandel@mac.com', to_date('04-SEP-1980', 'dd-mon-yyyy'), 'Female', 170000, to_date('10-DEC-2011', 'dd-mon-yyyy'), '003', '00004');
+INSERT INTO EMPLOYEE
+VALUES ('00011', 'Delice', 'Delice', 'Administrative Assistants', '(313) 754-8326', 'boomzilla@yahoo.ca', to_date('25-DEC-1992', 'dd-mon-yyyy'), 'Male', 100000, to_date('29-APR-2016', 'dd-mon-yyyy'), '001', '00005');
+INSERT INTO EMPLOYEE
+VALUES ('00012', 'Laurie', 'Thornton', 'Administrative Assistants', '(795) 866-3879', 'hutton@aol.com', to_date('23-APR-1989', 'dd-mon-yyyy'), 'Female', 80000, to_date('08-FEB-2014', 'dd-mon-yyyy'), '002', '00004');
+INSERT INTO EMPLOYEE
+VALUES ('00013', 'Cecilia', 'Robertson', 'Administrative Assistants', '(882) 699-3761', 'neuffer@optonline.net', to_date('06-FEB-1988', 'dd-mon-yyyy'), 'Female', 110000, to_date('19-SEP-2011', 'dd-mon-yyyy'), '003', '00006');
+
+INSERT INTO FAULTREPORT
+VALUES ('8102001', to_date('28-DEC-2017  7:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7AWF715', '1025100');
+INSERT INTO FAULTREPORT
+VALUES ('8102002', to_date('08-FEB-2018  5:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'NXX-4980', '1025101');
+INSERT INTO FAULTREPORT
+VALUES ('8102003', to_date('03-MAY-2018 12:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '7APE647', '1025102');
+INSERT INTO FAULTREPORT
+VALUES ('8102004', to_date('30-APR-2018 2:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7APE647', '1025103');
+INSERT INTO FAULTREPORT
+VALUES ('8102005', to_date('16-AUG-2018  11:55am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'ASJ J44', '1025104');
+INSERT INTO FAULTREPORT
+VALUES ('8102006', to_date('19-JUN-2018  5:39pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '6VJD691', '1025105');
+INSERT INTO FAULTREPORT
+VALUES ('8102007', to_date('02-NOV-2018 3:45pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'AUW V73', '1025106');
+INSERT INTO FAULTREPORT
+VALUES ('8102008', to_date('31-AUG-2018  6:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', '7AWF715', '1025107');
+INSERT INTO FAULTREPORT
+VALUES ('8102009', to_date('09-NOV-2018 3:46pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'ASJ J44', '1025108');
+INSERT INTO FAULTREPORT
+VALUES ('8102010', to_date('29-SEP-2018  3:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '6VJD691', '1025109');
+INSERT INTO FAULTREPORT
+VALUES ('8102011', to_date('06-OCT-2018  7:36pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'UMF-5359', '1025110');
+INSERT INTO FAULTREPORT
+VALUES ('8102012', to_date('10-NOV-2018 11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'SLR-4081', '1025111');
+INSERT INTO FAULTREPORT
+VALUES ('8102013', to_date('15-NOV-2018 11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'UMF-5359', '1025112');
+INSERT INTO FAULTREPORT
+VALUES ('8102014', to_date('09-NOV-2018 7:18pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'ARR J83', '1025113');
+
+INSERT INTO OUTLET
+VALUES ('001', '645 E. Howard Drive', 'Port Saint Lucie', 'FL', '34952', '(626) 308-2508', '00002');
+INSERT INTO OUTLET
+VALUES ('002', '664 Third Avenue', 'New Orleans', 'LA', '70115', '(626) 308-2508', '00002');
+INSERT INTO OUTLET
+VALUES ('003', '533 Broad Ave', 'Warner Robins', 'GA', '31088', '(626) 308-2508', '00003');
+
