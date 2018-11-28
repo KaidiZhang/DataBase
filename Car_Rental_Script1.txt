@@ -54,10 +54,9 @@ CREATE TABLE VEHICLE
  DailyRate      NUMBER(4,2),
  InspectionDate DATE,
  OutNo          CHAR(7),
- SystemDate     DATE DEFAULT SYSDATE,
  CONSTRAINT Vehicle_LicenseNo_PK  PRIMARY KEY (LicenseNo),
  CONSTRAINT Vehicle_OutNo_FK      FOREIGN KEY (OutNo) REFERENCES OUTLET (OutNo),
- CONSTRAINT Vehicle_Age_CK        CHECK (EXTRACT(YEAR FROM SystemDate) - Year <= 10));
+ CONSTRAINT Vehicle_Age_CK        CHECK (2018 - Year <= 10));
 
 
 CREATE TABLE CLIENT
