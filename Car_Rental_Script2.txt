@@ -10,7 +10,6 @@ INSERT INTO OUTLET
 VALUES ('1207004', '4303 Jacobs Street', 'Pittsburgh', 'PA', '15222', '(626) 308-2508', NULL);
 
 
-
 INSERT INTO EMPLOYEE
 VALUES ('00001', 'Ayah', 'Norris', 'President', '(868) 623-1760', 'miltchev@comcast.net', to_date('13-JUN-1968', 'dd-mon-yyyy'), 'Male', 500000, to_date('13-SEP-1998', 'dd-mon-yyyy'), '1207000', NULL);
 INSERT INTO EMPLOYEE
@@ -38,6 +37,7 @@ VALUES ('00012', 'Laurie', 'Thornton', 'Administrative Assistants', '(795) 866-3
 INSERT INTO EMPLOYEE
 VALUES ('00013', 'Cecilia', 'Robertson', 'Administrative Assistants', '(882) 699-3761', 'neuffer@optonline.net', to_date('06-FEB-1988', 'dd-mon-yyyy'), 'Female', 110000, to_date('19-SEP-2011', 'dd-mon-yyyy'), '1207002', '00006');
 
+
 UPDATE OUTLET
 SET ManagerNo = '00001'
 where OutNo = '1207000';
@@ -51,30 +51,28 @@ SET ManagerNo = '00003'
 where OutNo = '1207003' or OutNo = '1207004';
 
 
-
-
 INSERT INTO VEHICLE
-VALUES ('7AWF715', 'Nissan', 'Altima', 'White', 2017, 4, 5, 50.2, '25-SEP-2018', '1207000', SYSDATE);
+VALUES ('7AWF715', 'Nissan', 'Altima', 'White', 2017, 4, 5, 50.2, '25-SEP-2018', '1207000');
 INSERT INTO VEHICLE
-VALUES ('6VJD691', 'Nissan', 'Frontier', 'Black', 2018, 4, 4, 42, '12-MAR-2018', '1207000', SYSDATE);
+VALUES ('6VJD691', 'Nissan', 'Frontier', 'Black', 2018, 4, 4, 42, '12-MAR-2018', '1207000');
 INSERT INTO VEHICLE
-VALUES ('7APE647', 'Infiniti', 'Q50', 'Silver', 2017, 4, 5, 60.79, '12-FEB-2018', '1207000', SYSDATE);
+VALUES ('7APE647', 'Infiniti', 'Q50', 'Silver', 2017, 4, 5, 60.79, '12-FEB-2018', '1207000');
 INSERT INTO VEHICLE
-VALUES ('AUW V73', 'Hyundai', 'Sante Fe', 'Blue', 2017, 4, 5, 55.7, '23-DEC-2017', '1207001', SYSDATE);
+VALUES ('AUW V73', 'Hyundai', 'Sante Fe', 'Blue', 2017, 4, 5, 55.7, '23-DEC-2017', '1207001');
 INSERT INTO VEHICLE
-VALUES ('AEK B97', 'Infiniti', 'Q60', 'Grey', 2017, 2, 4, 80.99, '23-JAN-2018', '1207002', SYSDATE);
+VALUES ('AEK B97', 'Infiniti', 'Q60', 'Grey', 2017, 2, 4, 80.99, '23-JAN-2018', '1207002');
 INSERT INTO VEHICLE
-VALUES ('ASJ J44', 'Toyota', 'RAV4', 'White', 2018, 4, 5, 72.31, '03-FEB-2018', '1207001', SYSDATE);
+VALUES ('ASJ J44', 'Toyota', 'RAV4', 'White', 2018, 4, 5, 72.31, '03-FEB-2018', '1207001');
 INSERT INTO VEHICLE
-VALUES ('ARR J83', 'Honda', 'Civic', 'Red', 2018, 4, 5, 46.79, '07-APR-2018', '1207002', SYSDATE);
+VALUES ('ARR J83', 'Honda', 'Civic', 'Red', 2018, 4, 5, 46.79, '07-APR-2018', '1207002');
 INSERT INTO VEHICLE
-VALUES ('NXX-4980', 'Nissan', 'Maxima', 'Red', 2017, 4, 5, 67.99, '25-FEB-2018', '1207003', SYSDATE);
+VALUES ('NXX-4980', 'Nissan', 'Maxima', 'Red', 2017, 4, 5, 67.99, '25-FEB-2018', '1207003');
 INSERT INTO VEHICLE
-VALUES ('UMF-5359', 'Honda', 'CRV', 'White', 2017, 4, 5, 68.25, '31-JAN-2018', '1207004', SYSDATE);
+VALUES ('UMF-5359', 'Honda', 'CRV', 'White', 2017, 4, 5, 68.25, '31-JAN-2018', '1207004');
 INSERT INTO VEHICLE
-VALUES ('SLR-4081', 'BMW', 'X3', 'White', 2018, 4, 5, 76.85, '03-FEB-2018', '1207003', SYSDATE);
+VALUES ('SLR-4081', 'BMW', 'X3', 'White', 2018, 4, 5, 76.85, '03-FEB-2018', '1207003');
 INSERT INTO VEHICLE
-VALUES ('UGB-5754', 'Dodge', 'Challenger', 'Black', 2018, 2, 4, 78.65, '17-OCT-2018', '1207004', SYSDATE);
+VALUES ('UGB-5754', 'Dodge', 'Challenger', 'Black', 2018, 2, 4, 78.65, '17-OCT-2018', '1207004');
 
 
 INSERT INTO CLIENT
