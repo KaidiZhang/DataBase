@@ -158,24 +158,29 @@ CLEAR BREAKS
 
 
 -- Question 6
-SELECT outno, quarter, revenue, 
+SELECT outno, AVE, 
         CASE WHEN rank_asce = 1 AND rank_desc = 1 THEN 'Minimum/Maximum'
              WHEN rank_desc = 1 THEN 'Maximum' 
 		     WHEN rank_asce = 1 THEN 'Minimum' 
         END AS rank
-FROM(
-     SELECT outno, year || ' - Quarter ' || quarter AS quarter, revenue,
+from
+(select outno, sum(revenue) as AVE,
+RANK() OVER (ORDER BY sum(revenue)) AS rank_asce,
+	        RANK() OVER (ORDER BY sum(revenue) DESC) AS rank_desc
+from
+(SELECT outno, year || ' - Quarter ' || quarter AS quarter, revenue,
             RANK() OVER (PARTITION BY year || ' ' || quarter ORDER BY revenue) AS rank_asce,
 	        RANK() OVER (PARTITION BY year || ' ' || quarter ORDER BY revenue DESC) AS rank_desc
      FROM (
            SELECT outno, EXTRACT(YEAR FROM returndate) AS year, CEIL(EXTRACT(MONTH FROM returndate)/3) AS quarter,
-                  TO_CHAR(SUM(CEIL(returndate - startdate) * dailyrate), '$99,990.99') AS revenue
+                  SUM(CEIL(returndate - startdate) * dailyrate) AS revenue
            FROM outlet JOIN vehicle USING (outno)
                        JOIN ragreement USING (licenseno)
            WHERE EXTRACT(YEAR FROM returndate) || ' ' || CEIL(EXTRACT(MONTH FROM returndate)/3) IN ('2017 4', '2018 1')
            GROUP BY outno, EXTRACT(YEAR FROM returndate), CEIL(EXTRACT(MONTH FROM returndate)/3)
            )
-     )
+)
+GROUP BY outno)
 WHERE rank_asce = 1 OR rank_desc = 1;
 
 
