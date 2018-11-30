@@ -52,21 +52,21 @@ where OutNo = '1207003' or OutNo = '1207004';
 
 
 INSERT INTO VEHICLE
-VALUES ('7AWF715', 'Nissan', 'Altima', 'White', 2017, 4, 5, 50.2, '25-SEP-2018', '1207000');
+VALUES ('7AWF715', 'Nissan', 'Altima', 'White', 2015, 4, 5, 50.2, '25-SEP-2018', '1207000');
 INSERT INTO VEHICLE
-VALUES ('6VJD691', 'Nissan', 'Frontier', 'Black', 2017, 4, 4, 42, '12-MAR-2018', '1207000');
+VALUES ('6VJD691', 'Nissan', 'Frontier', 'Black', 2016, 4, 4, 42, '12-MAR-2018', '1207000');
 INSERT INTO VEHICLE
 VALUES ('7APE647', 'Infiniti', 'Q50', 'Silver', 2017, 4, 5, 60.79, '12-FEB-2018', '1207000');
 INSERT INTO VEHICLE
-VALUES ('AUW V73', 'Toyota', 'Camry', 'Blue', 2017, 4, 5, 50.7, '23-DEC-2017', '1207001');
+VALUES ('AUW V73', 'Toyota', 'Camry', 'Blue', 2015, 4, 5, 50.7, '23-DEC-2017', '1207001');
 INSERT INTO VEHICLE
-VALUES ('AEK B97', 'Infiniti', 'Q50', 'Grey', 2017, 2, 4, 58.4, '23-JAN-2018', '1207002');
+VALUES ('AEK B97', 'Infiniti', 'Q50', 'Grey', 2015, 2, 4, 58.4, '23-JAN-2018', '1207002');
 INSERT INTO VEHICLE
-VALUES ('ASJ J44', 'Toyota', 'RAV4', 'White', 2018, 4, 5, 72.31, '03-FEB-2018', '1207001');
+VALUES ('ASJ J44', 'Toyota', 'RAV4', 'White', 2017, 4, 5, 72.31, '03-FEB-2018', '1207001');
 INSERT INTO VEHICLE
 VALUES ('ARR J83', 'Honda', 'Civic', 'Red', 2018, 4, 5, 46.79, '07-APR-2018', '1207002');
 INSERT INTO VEHICLE
-VALUES ('NXX-4980', 'Nissan', 'Altima', 'Red', 2017, 4, 5, 55.99, '25-FEB-2018', '1207003');
+VALUES ('NXX-4980', 'Nissan', 'Altima', 'Red', 2016, 4, 5, 55.99, '25-FEB-2018', '1207003');
 INSERT INTO VEHICLE
 VALUES ('UMF-5359', 'Honda', 'CRV', 'White', 2017, 4, 5, 68.25, '31-JAN-2018', '1207004');
 INSERT INTO VEHICLE
@@ -108,7 +108,7 @@ VALUES ('1002014', 'ConverDyn', '53 Crowfield Road', 'Phoenix', 'AZ', '85034', '
 
 
 INSERT INTO RAGREEMENT
-VALUES ('1025100', to_date('25-JAN-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('20-FEB-2017  5:05pm', 'dd-mon-yyyy hh:miam'), 1660, 5441, 'Liability, Collision', '1002000', '7AWF715');
+VALUES ('1025100', to_date('25-JAN-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('20-FEB-2017  5:05pm', 'dd-mon-yyyy hh:miam'), 16602, 24410, 'Liability, Collision', '1002000', '7AWF715');
 INSERT INTO RAGREEMENT
 VALUES ('1025101', to_date('02-MAR-2017 10:58am', 'dd-mon-yyyy hh:miam'), to_date('30-MAR-2017  4:10pm', 'dd-mon-yyyy hh:miam'), 7992, 11801, 'Liability', '1002009', 'NXX-4980');
 INSERT INTO RAGREEMENT
@@ -120,7 +120,7 @@ VALUES ('1025104', to_date('05-JUL-2017  1:49pm', 'dd-mon-yyyy hh:miam'), to_dat
 INSERT INTO RAGREEMENT
 VALUES ('1025105', to_date('07-AUG-2017  10:33am', 'dd-mon-yyyy hh:miam'), to_date('20-SEP-2017 10:05am', 'dd-mon-yyyy hh:miam'), 18560, 20810, 'Liability, Comprehensive, Collision, Personal Injury', '1002013', '7APE647');
 INSERT INTO RAGREEMENT
-VALUES ('1025106', to_date('20-AUG-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('28-SEP-2017  6:05pm', 'dd-mon-yyyy hh:miam'), 5456, 9679, 'Liability, Collision', '1002005', '7AWF715');
+VALUES ('1025106', to_date('20-AUG-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('28-SEP-2017  6:05pm', 'dd-mon-yyyy hh:miam'), 24560, 26792, 'Liability, Collision', '1002005', '7AWF715');
 INSERT INTO RAGREEMENT
 VALUES ('1025107', to_date('03-SEP-2017 10:58am', 'dd-mon-yyyy hh:miam'), to_date('08-OCT-2017  10:20am', 'dd-mon-yyyy hh:miam'), 11892, 12120, 'Liability', '1002012', 'NXX-4980');
 INSERT INTO RAGREEMENT
@@ -128,9 +128,9 @@ VALUES ('1025108', to_date('25-SEP-2017  1:42pm', 'dd-mon-yyyy hh:miam'), to_dat
 INSERT INTO RAGREEMENT
 VALUES ('1025109', to_date('07-OCT-2017  9:53am', 'dd-mon-yyyy hh:miam'), to_date('30-NOV-2017 11:05am', 'dd-mon-yyyy hh:miam'), 20897, 23800, 'Liability, Comprehensive, Collision', '1002014', '7APE647');
 INSERT INTO RAGREEMENT
-VALUES ('1025110', to_date('15-NOV-2017  1:28pm', 'dd-mon-yyyy hh:miam'), to_date('16-JAN-2018  11:25am', 'dd-mon-yyyy hh:miam'), 1858, 10201, 'Liability, Collision, Uninsured Motorist', '1002009', 'ASJ J44');
+VALUES ('1025110', to_date('15-NOV-2017  1:28pm', 'dd-mon-yyyy hh:miam'), to_date('16-JAN-2018  11:25am', 'dd-mon-yyyy hh:miam'), 6858, 10201, 'Liability, Collision, Uninsured Motorist', '1002009', 'ASJ J44');
 INSERT INTO RAGREEMENT
-VALUES ('1025111', to_date('25-NOV-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('28-DEC-2017  6:05pm', 'dd-mon-yyyy hh:miam'), 9689, 15798, 'Liability, Collision', '1002011', '7AWF715');
+VALUES ('1025111', to_date('25-NOV-2017  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('28-DEC-2017  6:05pm', 'dd-mon-yyyy hh:miam'), 26889, 29798, 'Liability, Collision', '1002011', '7AWF715');
 INSERT INTO RAGREEMENT
 VALUES ('1025112', to_date('02-DEC-2017 10:58am', 'dd-mon-yyyy hh:miam'), to_date('08-FEB-2018  4:20pm', 'dd-mon-yyyy hh:miam'), 12131, 21030, 'Liability', '1002001', 'NXX-4980');
 INSERT INTO RAGREEMENT
@@ -144,7 +144,7 @@ VALUES ('1025116', to_date('07-JUN-2018  2:15pm', 'dd-mon-yyyy hh:miam'), to_dat
 INSERT INTO RAGREEMENT
 VALUES ('1025117', to_date('10-JUN-2018  9:52am', 'dd-mon-yyyy hh:miam'), to_date('02-AUG-2018 11:45am', 'dd-mon-yyyy hh:miam'), 68658, 77916, 'Liability', '1002006', 'AUW V73');
 INSERT INTO RAGREEMENT
-VALUES ('1025118', to_date('10-JUL-2018  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('31-AUG-2018  4:17pm', 'dd-mon-yyyy hh:miam'), 15890, 29008, 'Liability, Collision', '1002014', '7AWF715');
+VALUES ('1025118', to_date('10-JUL-2018  3:23pm', 'dd-mon-yyyy hh:miam'), to_date('31-AUG-2018  4:17pm', 'dd-mon-yyyy hh:miam'), 29890, 35008, 'Liability, Collision', '1002014', '7AWF715');
 INSERT INTO RAGREEMENT
 VALUES ('1025119', to_date('05-AUG-2018  9:20am', 'dd-mon-yyyy hh:miam'), to_date('09-NOV-2018 10:46am', 'dd-mon-yyyy hh:miam'), 19635, 25672, 'Liability', '1002006', 'ASJ J44');
 INSERT INTO RAGREEMENT
@@ -156,7 +156,7 @@ VALUES ('1025122', to_date('16-SEP-2018 11:18am', 'dd-mon-yyyy hh:miam'), to_dat
 INSERT INTO RAGREEMENT
 VALUES ('1025123', to_date('19-OCT-2018 12:18pm', 'dd-mon-yyyy hh:miam'), to_date('15-NOV-2018  9:34am', 'dd-mon-yyyy hh:miam'), 29118, 31124, 'Liability, Collision, Uninsured Motorist', '1002008', 'UMF-5359');
 INSERT INTO RAGREEMENT
-VALUES ('1025124', to_date('08-OCT-2018  4:18pm', 'dd-mon-yyyy hh:miam'), to_date('09-NOV-2018  6:18pm', 'dd-mon-yyyy hh:miam'), 6212, 9379, 'Liability, Collision', '1002006', 'ARR J83');
+VALUES ('1025124', to_date('08-NOV-2018  4:18pm', 'dd-mon-yyyy hh:miam'), to_date('', 'dd-mon-yyyy hh:miam'), 6212, 9379, 'Liability, Collision', '1002006', 'ARR J83');
 
 
 INSERT INTO FAULTREPORT
