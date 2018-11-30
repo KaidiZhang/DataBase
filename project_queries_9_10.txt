@@ -1,0 +1,30 @@
+10.
+select EMPLOYINFO, Position, OutNo, Street, nvl(NUM, 0) "NUM"
+from
+(select LEVEL, LPAD(' ', 3*(LEVEL-1)) || EmpNo || '     ' || Fname || ' ' || Lname  "EMPLOYINFO", Position, OutNo, Street, EmpNo
+from EMPLOYEE join OUTLET using (outNo)
+START WITH EmpNo = '00001'
+CONNECT BY PRIOR EmpNo = SupervisorNo)
+left join 
+(select EmpNo, count(ReportNum) "NUM"
+from FAULTREPORT
+where sysdate - DateChecked <=90
+GROUP BY EmpNo)
+using (EmpNo)
+
+9.
+select OutNo, CliNum, RenNum, CliNum/TOTALCLI as CLIPERCENT,  RenNum/TOTALRen as RenPERCENT
+from
+(select OutNo, Count(ClientNo) as CliNum, Count(RentalNo) as RenNum
+from OUTLET join VEHICLE using (outNo)
+	      join RAGREEMENT using (LicenseNo)
+	      join CLIENT using (clientNo)
+where OUTLET.State=CLIENT.state
+GROUP BY OutNo)
+join 
+(select OutNo, Count(ClientNo) as TOTALCLI, Count(RentalNo) as TOTALRen
+from OUTLET join VEHICLE using (outNo)
+	      join RAGREEMENT using (LicenseNo)
+	      join CLIENT using (clientNo)
+GROUP BY OutNo)
+using (OutNo)
