@@ -160,30 +160,29 @@ VALUES ('1025124', to_date('08-NOV-2018  4:18pm', 'dd-mon-yyyy hh:miam'), to_dat
 
 
 INSERT INTO FAULTREPORT
-VALUES ('8102001', to_date('28-DEC-2017  7:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7AWF715', '1025100');
+VALUES ('8102001', to_date('20-FEB-2017  6:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7AWF715', '1025100');
 INSERT INTO FAULTREPORT
-VALUES ('8102002', to_date('08-FEB-2018  5:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'NXX-4980', '1025101');
+VALUES ('8102002', to_date('03-APR-2017 2:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'NXX-4980', '1025102');
 INSERT INTO FAULTREPORT
-VALUES ('8102003', to_date('03-MAY-2018 12:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '7APE647', '1025102');
+VALUES ('8102003', to_date('28-SEP-2017  7:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '7APE647', '1025106');
 INSERT INTO FAULTREPORT
-VALUES ('8102004', to_date('30-APR-2018 2:05pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7APE647', '1025103');
+VALUES ('8102004', to_date('08-OCT-2017  11:20am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '7APE647', '1025108');
 INSERT INTO FAULTREPORT
-VALUES ('8102005', to_date('16-AUG-2018  11:55am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'ASJ J44', '1025104');
+VALUES ('8102005', to_date('16-JAN-2018  11:35am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'ASJ J44', '1025110');
 INSERT INTO FAULTREPORT
-VALUES ('8102006', to_date('19-JUN-2018  5:39pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '6VJD691', '1025105');
+VALUES ('8102006', to_date('08-FEB-2018  5:20pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', '6VJD691', '1025112');
 INSERT INTO FAULTREPORT
-VALUES ('8102007', to_date('02-NOV-2018 3:45pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'AUW V73', '1025106');
+VALUES ('8102007', to_date('30-APR-2018 11:35am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'AUW V73', '1025114');
 INSERT INTO FAULTREPORT
-VALUES ('8102008', to_date('31-AUG-2018  6:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', '7AWF715', '1025107');
+VALUES ('8102008', to_date('16-AUG-2018  11:55am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', '7AWF715', '1025115');
 INSERT INTO FAULTREPORT
-VALUES ('8102009', to_date('09-NOV-2018 3:46pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'ASJ J44', '1025108');
+VALUES ('8102009', to_date('19-JUN-2018  4:39pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'ASJ J44', '1025116');
 INSERT INTO FAULTREPORT
-VALUES ('8102010', to_date('29-SEP-2018  3:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '6VJD691', '1025109');
+VALUES ('8102010', to_date('31-AUG-2018  6:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', '6VJD691', '1025118');
 INSERT INTO FAULTREPORT
-VALUES ('8102011', to_date('06-OCT-2018  7:36pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'UMF-5359', '1025110');
+VALUES ('8102011', to_date('29-SEP-2018  3:17pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'UMF-5359', '1025120');
 INSERT INTO FAULTREPORT
-VALUES ('8102012', to_date('10-NOV-2018 11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'SLR-4081', '1025111');
+VALUES ('8102012', to_date('10-NOV-2018 11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00010', 'SLR-4081', '1025122');
 INSERT INTO FAULTREPORT
-VALUES ('8102013', to_date('15-NOV-2018 11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'UMF-5359', '1025112');
-INSERT INTO FAULTREPORT
-VALUES ('8102014', to_date('09-NOV-2018 7:18pm', 'dd-mon-yyyy hh:miam'), 'No Comments', '00009', 'ARR J83', '1025113');
+VALUES ('8102013', to_date('15-NOV-2018  11:34am', 'dd-mon-yyyy hh:miam'), 'No Comments', '00008', 'UMF-5359', '1025123');
+
