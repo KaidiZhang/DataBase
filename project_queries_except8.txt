@@ -1,0 +1,282 @@
+/*
+CONNECT casteelhw/tiger
+SET PAGESIZE 1000
+SET LINESIZE 1000
+START D:\DatabaseProject\DataBase\Car_Rental_Script1.txt
+START D:\DatabaseProject\DataBase\Car_Rental_Script2.txt
+
+
+*/
+
+--Question 1
+COLUMN rentalno FORMAT A8
+COLUMN returndate FORMAT A10
+COLUMN licenseno FORMAT A9
+COLUMN MAKE FORMAT A10
+COLUMN MODEL FORMAT A10
+
+SELECT rentalno, TO_CHAR(startdate, 'DD-MON-YYYY hh:miam') AS start_datetime, NVL(TO_CHAR(returndate, 'DD-MON-YYYY hh:miam'), 'Not Returned Yet') AS return_datetime, mileagebefore, mileageafter, licenseno, outno, make, model, year,
+       NVL(TO_CHAR(datechecked, 'DD-MON-YYYY'), 'No fault report') AS datechecked
+FROM ragreement JOIN vehicle USING (licenseno)
+                LEFT JOIN faultreport USING (rentalno, licenseno);
+
+--Question 2
+--Cover 12 months in 2017
+COLUMN avg_distance FORMAT A12
+
+SELECT outno, COUNT(licenseno) AS "#CARS", COUNT(rentalno) AS "#RENTALS",
+       NVL(TO_CHAR(AVG(mileageafter - mileagebefore),'9,990'), 'N/A') AS avg_distance, x as "#EMPLOYEES",
+	   ROUND(COUNT(rentalno)/x) AS rentals_per_employee
+FROM outlet JOIN vehicle USING (outno)
+            LEFT JOIN (SELECT * FROM ragreement WHERE EXTRACT(YEAR FROM startdate) = 2017) USING (licenseno)
+			LEFT JOIN (SELECT outno, COUNT(empno) AS x FROM employee WHERE EXTRACT(YEAR FROM hiredate) <= 2017 GROUP BY outno) USING (outno)
+GROUP BY outno, x;			
+
+
+/*
+--Question 3
+--past 12 months since now
+SELECT DECODE(TO_CHAR(y, 'MON YYYY'), NULL, 'Outlet Total', TO_CHAR(y, 'MON YYYY')) AS Month,
+       TO_CHAR(SUM(DECODE(outno, '1207000', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207000,
+	   TO_CHAR(SUM(DECODE(outno, '1207001', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207001,
+	   TO_CHAR(SUM(DECODE(outno, '1207002', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207002,
+	   TO_CHAR(SUM(DECODE(outno, '1207003', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207003,
+	   TO_CHAR(SUM(DECODE(outno, '1207004', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207004,
+       TO_CHAR(NVL(SUM(CEIL(returndate - startdate) * dailyrate), 0), '$999,990.99') AS total_revenue,
+	   COUNT(rentalno) AS "#RENTALS", 
+	   NVL(TO_CHAR(SUM(CEIL(returndate - startdate) * dailyrate) / COUNT(rentalno), '$99,990.99'), 'N/A') AS rev_per_rental
+FROM outlet JOIN vehicle USING (outno)
+            JOIN ragreement USING (licenseno)	 
+            RIGHT JOIN (SELECT EXTRACT(YEAR FROM ADD_MONTHS(SYSDATE, -level)) AS sys_year,
+                               EXTRACT(MONTH FROM ADD_MONTHS(SYSDATE, -level)) AS sys_month,
+				               TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, -level), 'MON YYYY'), 'MON YYYY') AS y
+                        FROM dual 
+                        CONNECT BY level <= 12
+                        ORDER BY 1,2) 
+			ON EXTRACT(YEAR FROM returndate) = sys_year AND EXTRACT(MONTH FROM returndate) = sys_month
+GROUP BY ROLLUP (y)
+ORDER BY y;
+*/
+
+--Question 3
+--Cover 12 months in 2017
+--Only returned rentals are considered for revenue
+SELECT DECODE(TO_CHAR(y, 'MON YYYY'), NULL, 'Outlet Total', TO_CHAR(y, 'MON YYYY')) AS Month,
+       TO_CHAR(SUM(DECODE(outno, '1207000', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207000,
+	   TO_CHAR(SUM(DECODE(outno, '1207001', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207001,
+	   TO_CHAR(SUM(DECODE(outno, '1207002', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207002,
+	   TO_CHAR(SUM(DECODE(outno, '1207003', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207003,
+	   TO_CHAR(SUM(DECODE(outno, '1207004', CEIL(returndate - startdate) * dailyrate, 0)), '$99,990.99') AS rev_1207004,
+       TO_CHAR(NVL(SUM(CEIL(returndate - startdate) * dailyrate), 0), '$999,990.99') AS total_revenue,
+	   COUNT(rentalno) AS "#RENTALS", 
+	   NVL(TO_CHAR(SUM(CEIL(returndate - startdate) * dailyrate) / COUNT(rentalno), '$99,990.99'), 'N/A') AS rev_per_rental
+FROM outlet JOIN vehicle USING (outno)
+            JOIN ragreement USING (licenseno)	 
+            RIGHT JOIN (SELECT EXTRACT(MONTH FROM ADD_MONTHS(TO_DATE('01-JAN-2018', 'DD-MON-YYYY'), -level)) AS sys_month,
+			            TO_DATE(TO_CHAR(ADD_MONTHS(TO_DATE('01-JAN-2018', 'DD-MON-YYYY'), -level), 'MON YYYY'), 'MON YYYY') AS y
+                        FROM dual 
+                        CONNECT BY level <= 12
+                        ORDER BY 1) 
+			ON EXTRACT(YEAR FROM returndate) = 2017 AND EXTRACT(MONTH FROM returndate) = sys_month
+GROUP BY ROLLUP (y)
+ORDER BY y;
+
+
+--Question 4
+--Values in each column represent number of rentals and number of fault reports, concatenated by '/'
+COLUMN monday FORMAT A10
+COLUMN tuesday FORMAT A10
+COLUMN wednesday FORMAT A10
+COLUMN thursday FORMAT A10
+COLUMN friday FORMAT A10
+COLUMN saturday FORMAT A10
+COLUMN sunday FORMAT A10
+COLUMN "Outlet Total (Rentals/Faults)" FORMAT A29
+
+SELECT A.outno, 
+       A.monday || ' / ' || B.monday AS monday,
+       A.tuesday || ' / ' || B.tuesday AS tuesday,
+       A.wednesday || ' / ' || B.wednesday AS wednesday,
+       A.thursday || ' / ' || B.thursday AS thursday,
+       A.friday || ' / ' || B.friday AS friday,
+       A.saturday || ' / ' || B.saturday AS saturday,
+       A.sunday || ' / ' || B.sunday AS sunday,
+	   A.total || ' / ' || B.total AS "Outlet Total (Rentals/Faults)"
+FROM (
+SELECT DECODE(outno, NULL, 'WeekDay Total', outno) AS outno,
+       SUM(DECODE(x, 'Monday', 1, 0)) AS monday,
+       SUM(DECODE(x, 'Tuesday', 1, 0)) AS tuesday,
+	   SUM(DECODE(x, 'Wednesday', 1, 0)) AS wednesday,
+	   SUM(DECODE(x, 'Thursday', 1, 0)) AS thursday,
+	   SUM(DECODE(x, 'Friday', 1, 0)) AS friday,
+	   SUM(DECODE(x, 'Saturday', 1, 0)) AS saturday,
+	   SUM(DECODE(x, 'Sunday', 1, 0)) AS sunday,
+	   COUNT(rentalno) as total
+FROM outlet JOIN vehicle USING (outno)
+            JOIN ragreement USING (licenseno)			
+            JOIN (SELECT TRIM(TO_CHAR((SYSDATE + level), 'Day')) AS x
+						FROM dual
+						CONNECT BY level <= 7) ON TRIM(TO_CHAR(startdate, 'Day')) = x
+WHERE startdate > ADD_MONTHS(SYSDATE, -6) 
+GROUP BY ROLLUP (outno)
+) A
+JOIN (
+SELECT DECODE(outno, NULL, 'WeekDay Total', outno) AS outno,
+       SUM(DECODE(x, 'Monday', 1, 0)) AS monday,
+       SUM(DECODE(x, 'Tuesday', 1, 0)) AS tuesday,
+	   SUM(DECODE(x, 'Wednesday', 1, 0)) AS wednesday,
+	   SUM(DECODE(x, 'Thursday', 1, 0)) AS thursday,
+	   SUM(DECODE(x, 'Friday', 1, 0)) AS friday,
+	   SUM(DECODE(x, 'Saturday', 1, 0)) AS saturday,
+	   SUM(DECODE(x, 'Sunday', 1, 0)) AS sunday,
+	   COUNT(reportnum) AS total
+FROM outlet JOIN vehicle USING (outno)
+            JOIN faultreport USING (licenseno)			
+            JOIN (SELECT TRIM(TO_CHAR((SYSDATE + level), 'Day')) AS x
+						FROM dual
+						CONNECT BY level <= 7) ON TRIM(TO_CHAR(datechecked, 'Day')) = x
+WHERE datechecked > ADD_MONTHS(SYSDATE, -6) 
+GROUP BY ROLLUP (outno)
+) B
+ON  A.outno = B.outno;
+
+
+--Question 5
+BREAK ON manager
+COLUMN manager FORMAT A25
+COLUMN rev_per_rental FORMAT A14
+COLUMN report_per_rental FORMAT A17
+
+SELECT TRIM(managerno) || ': ' || fname || ' ' || lname AS manager, NVL(outno, 'All Managed Outlets') AS outno, COUNT(rentalno) AS "#RENTALS",
+       TO_CHAR(SUM(CEIL(returndate - startdate) * dailyrate) / COUNT(rentalno), '$99,990.99') AS rev_per_rental,
+	   TO_CHAR(COUNT(reportnum) / COUNT(rentalno), '90.99') AS report_per_rental
+FROM outlet JOIN employee ON managerno = empno
+            JOIN vehicle ON outlet.outno = vehicle.outno
+            JOIN ragreement USING (licenseno)
+			LEFT JOIN faultreport USING (rentalno, licenseno)
+GROUP BY GROUPING SETS ((managerno, fname, lname, outno), (managerno, fname, lname));
+
+CLEAR BREAKS
+
+
+-- Question 6
+SELECT outno, TO_CHAR(revenue, '$99,990.99') AS revenue, 
+        CASE WHEN rank_asce = 1 AND rank_desc = 1 THEN 'Minimum/Maximum'
+             WHEN rank_desc = 1 THEN 'Maximum' 
+		     WHEN rank_asce = 1 THEN 'Minimum' 
+        END AS rank
+FROM
+(SELECT outno, revenue,
+            RANK() OVER (ORDER BY revenue) AS rank_asce,
+	        RANK() OVER (ORDER BY revenue DESC) AS rank_desc
+     FROM (
+           SELECT outno, SUM(CEIL(returndate - startdate) * dailyrate) AS revenue
+           FROM outlet JOIN vehicle USING (outno)
+                       JOIN ragreement USING (licenseno)
+           WHERE EXTRACT(YEAR FROM returndate) || ' ' || CEIL(EXTRACT(MONTH FROM returndate)/3) IN ('2017 4', '2018 1')
+           GROUP BY outno
+           )
+)
+WHERE rank_asce = 1 OR rank_desc = 1;
+
+
+--Question 7
+COLUMN car_avg_age FORMAT A11
+
+SELECT CASE WHEN make IS NULL THEN 'Grand Total'
+            WHEN model IS NULL THEN make || ': Subtotal' 
+            ELSE make || ': ' || model END AS make_model,
+       COUNT(DISTINCT licenseno) AS "#CARS", TO_CHAR(AVG(2018 - year), '90.9') AS car_avg_age, 
+       COUNT(rentalno) AS "#RENTALS_2018", 
+	   SUM(TRUNC(NVL(returndate, SYSDATE)) - (CASE WHEN TO_DATE('01-JAN-18', 'dd-MON-yy') < TRUNC(startdate)
+	                                 THEN TO_DATE('01-JAN-18', 'dd-MON-yy')
+								     ELSE TRUNC(startdate) END) 
+							 + 1) AS rent_days_2018,
+	   COUNT(reportnum) AS "#FAULT_REPORTS_2018"
+FROM vehicle LEFT JOIN (SELECT * FROM ragreement 
+                        WHERE EXTRACT(YEAR FROM startdate) = 2018 OR EXTRACT(YEAR FROM returndate) = 2018)
+                  USING (licenseno)
+             LEFT JOIN (SELECT * FROM faultreport
+                        WHERE EXTRACT(YEAR FROM datechecked) = 2018)			 
+			      USING (rentalno, licenseno)
+GROUP BY ROLLUP (make, model);
+
+
+--Question 8
+/*
+COLUMN qtr1_prob_fault FORMAT A15
+COLUMN qtr2_prob_fault FORMAT A15
+COLUMN qtr3_prob_fault FORMAT A15
+COLUMN qtr4_prob_fault FORMAT A15
+COLUMN qtr1_rank FORMAT A10
+COLUMN qtr2_rank FORMAT A10
+COLUMN qtr3_rank FORMAT A10
+COLUMN qtr4_rank FORMAT A10
+
+SELECT make, SUM(DECODE(quarter, 1, 1, 0)) AS qtr1_rentals, 
+             NVL(TO_CHAR(SUM(DECODE(quarter, 1, 1, 0)) / SUM(DECODE(quarter||reportnum, '1NA', 0, 1)), '0.99'), 'N/A') AS qtr1_prob_fault, 
+			 DECODE(quarter, 1, TO_CHAR(RANK() OVER (PARTITION BY quarter ORDER BY COUNT(reportnum) / COUNT(rentalno) DESC), '9'), 'N/A') AS qtr1_rank,	 
+             SUM(DECODE(quarter, 2, 1, 0)) AS qtr2_rentals, 
+             DECODE(quarter, 2, TO_CHAR(COUNT(reportnum) / COUNT(rentalno), '0.99'), 'N/A') AS qtr2_prob_fault, 
+			 DECODE(quarter, 2, TO_CHAR(RANK() OVER (PARTITION BY quarter ORDER BY COUNT(reportnum) / COUNT(rentalno) DESC), '9'), 'N/A') AS qtr2_rank,
+             SUM(DECODE(quarter, 3, 1, 0)) AS qtr3_rentals, 
+             DECODE(quarter, 3, TO_CHAR(COUNT(reportnum) / COUNT(rentalno), '0.99'), 'N/A') AS qtr3_prob_fault, 
+			 DECODE(quarter, 3, TO_CHAR(RANK() OVER (PARTITION BY quarter ORDER BY COUNT(reportnum) / COUNT(rentalno) DESC), '9'), 'N/A') AS qtr3_rank,
+             SUM(DECODE(quarter, 4, 1, 0)) AS qtr4_rentals, 
+             DECODE(quarter, 4, TO_CHAR(COUNT(reportnum) / COUNT(rentalno), '0.99'), 'N/A') AS qtr4_prob_fault, 
+			 DECODE(quarter, 4, TO_CHAR(RANK() OVER (PARTITION BY quarter ORDER BY COUNT(reportnum) / COUNT(rentalno) DESC), '9'), 'N/A') AS qtr4_rank
+FROM ( 
+      SELECT make, CEIL(EXTRACT(MONTH FROM returndate)/3) AS quarter, 
+             rentalno, NVL(reportnum, 'NA'), licenseno
+      FROM vehicle LEFT JOIN ragreement USING (licenseno)
+                   LEFT JOIN faultreport USING (rentalno, licenseno)
+      WHERE EXTRACT(YEAR FROM startdate) = 2017
+	  ORDER BY 1,2
+ 	  )
+GROUP BY make, quarter;
+*/
+
+	  
+--Question 9
+COLUMN client_pct FORMAT A10
+COLUMN rental_pct FORMAT A10
+SELECT outno, clinum AS "#CLIENTS_OUT_STATE", rennum AS "#RENTALS", 
+       TO_CHAR(clinum/totalcli, '0.99') AS client_pct, TO_CHAR(rennum/totalren, '0.99') AS rental_pct
+FROM (
+     SELECT outno, COUNT(DISTINCT clientno) AS clinum, COUNT(rentalno) AS rennum
+     FROM outlet JOIN vehicle USING (outno)
+	             JOIN ragreement USING (LicenseNo)
+	             JOIN client USING (clientNo)
+     WHERE outlet.state=client.state
+     GROUP BY outno
+	 ) 
+JOIN (
+	  SELECT outno, COUNT(DISTINCT clientno) AS totalcli, COUNT(rentalno) AS totalren
+      FROM outlet JOIN vehicle USING (outno)
+	  JOIN ragreement USING (LicenseNo)
+	  JOIN client USING (clientNo)
+      GROUP BY outno
+	  )
+USING (outno);
+
+
+--Question 10
+COLUMN employee FORMAT A37
+COLUMN "#FAULT_REPORTS" FORMAT A14
+COLUMN outlet FORMAT A37
+COLUMN "#FAULT_REPORTS" FORMAT A15
+
+SELECT employee, position, TRIM(outno || ': '|| street) AS outlet, TRIM(NVL(NUM, 0)) "#FAULT_REPORTS"
+FROM (
+      SELECT LEVEL, LPAD(' ', 3*(LEVEL-1)) || TRIM(empno) || ': ' || fname || ' ' || lname employee, position, outno, street, empno
+      FROM employee join outlet using (outno)
+      START WITH empno = '00001'
+      CONNECT BY PRIOR empno = supervisorno
+	  )
+LEFT JOIN (
+           SELECT empno, count(reportnum) "NUM"
+           FROM faultreport
+           WHERE TRUNC(SYSDATE) - TRUNC(datechecked) <=90
+           GROUP BY empno)
+USING (empno);
+
