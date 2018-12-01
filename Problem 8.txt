@@ -1,0 +1,14 @@
+break on quarter
+SELECT quarter, make, renCount, repCount, Pro, RANK() OVER (PARTITION BY quarter ORDER BY Pro DESC) as RANK
+from
+(SELECT make, quarter, count(rentalno) as renCount, count(reportnum) as repCount, count(reportnum)/count(rentalno) as Pro
+from
+(SELECT rentalno, reportnum, make, 
+	(Case when startdate >='01-JAN-17' and startdate < '01-APR-17' then 1
+		when startdate >='01-APR-17' and startdate < '01-JUL-17' then 2
+		when startdate >='01-JUL-17' and startdate < '01-OCT-17' then 3
+		when startdate >='01-OCT-17' and startdate < '01-JAN-18' then 4 else 0 end) as quarter
+from ragreement join vehicle using (licenseNo)
+	left outer join faultreport using (rentalNo)
+where Extract (year from startdate) = 2017)
+GROUP BY (make, quarter))
