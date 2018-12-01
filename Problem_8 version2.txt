@@ -1,0 +1,30 @@
+select make, Qua1_Num, Qua1_Pro, (Case when Qua1_Pro is null then null else Qua1_rank end) as Qua1_rank, Qua2_Num, Qua2_Pro, (Case when Qua2_Pro is null then null else Qua2_rank end) as Qua2_rank, Qua3_Num, Qua3_Pro, (Case when Qua3_Pro is null then null else Qua3_rank end) as Qua3_rank, Qua4_Num, Qua4_Pro, (Case when Qua4_Pro is null then null else Qua4_rank end) as Qua4_rank
+from
+(select make, Qua1_Num, Qua1_Pro, RANK() OVER (ORDER BY Qua1_Pro DESC NULLS LAST) AS Qua1_rank, Qua2_Num, Qua2_Pro, RANK() OVER (ORDER BY Qua2_Pro DESC NULLS LAST) AS Qua2_rank, Qua3_Num, Qua3_Pro, RANK() OVER (ORDER BY Qua3_Pro DESC NULLS LAST) AS Qua3_rank, Qua4_Num, Qua4_Pro, RANK() OVER (ORDER BY Qua4_Pro DESC NULLS LAST) AS Qua4_rank
+from
+(((select make, count(rentalNo) as Qua1_Num, count(reportNum)/count(rentalNo) as Qua1_Pro
+from RAGREEMENT join VEHICLE using (LicenseNo)
+		left join FAULTREPORT using (LicenseNo, rentalNo)
+where StartDate>='01-JAN-17' and StartDate<'01-APR-17'
+GROUP BY make)
+Full outer join
+(select make, count(rentalNo) as Qua2_Num, count(reportNum)/count(rentalNo) as Qua2_Pro
+from RAGREEMENT join VEHICLE using (LicenseNo)
+		left join FAULTREPORT using (LicenseNo, rentalNo)
+where StartDate>='01-APR-17' and StartDate<'01-JUL-17'
+GROUP BY make)
+Using (make))
+Full outer join
+((select make, count(rentalNo) as Qua3_Num, count(reportNum)/count(rentalNo) as Qua3_Pro
+from RAGREEMENT join VEHICLE using (LicenseNo)
+		left join FAULTREPORT using (LicenseNo, rentalNo)
+where StartDate>='01-JUL-17' and StartDate<'01-OCT-17'
+GROUP BY make)
+Full outer join
+(select make, count(rentalNo) as Qua4_Num, count(reportNum)/count(rentalNo) as Qua4_Pro
+from RAGREEMENT join VEHICLE using (LicenseNo)
+		left join FAULTREPORT using (LicenseNo, rentalNo)
+where StartDate>='01-OCT-17' and StartDate<'01-JAN-18'
+GROUP BY make)
+using (make))
+using (make)))
